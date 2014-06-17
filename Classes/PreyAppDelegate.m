@@ -17,6 +17,7 @@
 #import "AlertModuleController.h"
 #import "FakeWebView.h"
 #import "WizardController.h"
+#import "OnboardingView.h"
 #import "ReportModule.h"
 #import "AlertModule.h"
 #import "GAI.h"
@@ -269,6 +270,19 @@
     else
     {
         [PreyDeployment runPreyDeployment];
+        
+#warning Test OnboardingView
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            if (IS_IPHONE5)
+                nextController = [[OnboardingView alloc] initWithNibName:@"OnboardingView-iPhone-568h" bundle:nil];
+            else
+                nextController = [[OnboardingView alloc] initWithNibName:@"OnboardingView-iPhone" bundle:nil];
+        }
+        else
+            nextController = [[OnboardingView alloc] initWithNibName:@"OnboardingView-iPad" bundle:nil];
+        
+
         /*
          if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
          {
@@ -281,6 +295,7 @@
          nextController = [[WizardController alloc] initWithNibName:@"WizardController-iPad" bundle:nil];
          */
         
+        /*
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
             if (IS_IPHONE5)
@@ -290,6 +305,7 @@
         }
         else
             nextController = [[WelcomeController alloc] initWithNibName:@"WelcomeController-iPad" bundle:nil];
+        */
     }
     
 	viewController = [[UINavigationController alloc] initWithRootViewController:nextController];
